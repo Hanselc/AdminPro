@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // Routes
 import { PAGES_ROUTES } from './pages.routes';
@@ -7,25 +9,33 @@ import { PAGES_ROUTES } from './pages.routes';
 import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProgressComponent } from './progress/progress.component';
+import { ProgressPageComponent } from './progress-page/progress-page.component';
 import { Graphs1Component } from './graphs1/graphs1.component';
 import { PagesComponent } from './pages.component';
+import { ProgressComponent } from '../components/progress/progress.component';
+import { ChartsModule } from 'ng2-charts';
+import { GraphsComponent } from '../components/graphs/graphs.component';
 
 @NgModule({
   imports: [
     SharedModule,
+    FormsModule,
+    ChartsModule,
+    CommonModule,
     PAGES_ROUTES
   ],
   declarations: [
     PagesComponent,
     DashboardComponent,
+    ProgressPageComponent,
+    Graphs1Component,
     ProgressComponent,
-    Graphs1Component
+    GraphsComponent
   ],
   exports: [
     PagesComponent,
     DashboardComponent,
-    ProgressComponent,
+    ProgressPageComponent,
     Graphs1Component
   ]
 })

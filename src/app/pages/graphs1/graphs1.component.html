@@ -1,3 +1,34 @@
-<p>
-  graphs1 works!
-</p>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{graphs.grafico1.leyenda}}</h5>
+                <app-graphs [data]="graphs.grafico1.data" [labels]="graphs.grafico1.labels" [chartType]="graphs.grafico1.type"></app-graphs>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{graphs.grafico2.leyenda}}</h5>
+                <app-graphs [data]="graphs.grafico2.data" [labels]="graphs.grafico2.labels" [chartType]="graphs.grafico2.type"></app-graphs>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{graphs.grafico3.leyenda}}</h5>
+                <app-graphs [data]="graphs.grafico3.data" [labels]="graphs.grafico3.labels" [chartType]="graphs.grafico3.type"></app-graphs>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{graphs.grafico4.leyenda}}</h5>
+                <app-graphs [data]="graphs.grafico4.data" [labels]="graphs.grafico4.labels" [chartType]="graphs.grafico4.type"></app-graphs>
+            </div>
+        </div>
+    </div>
+</div>

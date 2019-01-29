@@ -1,0 +1,13 @@
+<h5>
+    {{ legend }}
+</h5>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button class="btn btn-primary" type="button" (click)="changeValue(-5)"><i class="mdi mdi-minus"></i></button>
+    </div>
+    <input #txtnumber type="number" name="txtnumber" class="form-control" [(ngModel)]="percent" (ngModelChange)="onChange($event)" min=0 max=100>
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="button" (click)="changeValue(+5)"><i class="mdi mdi-plus"></i></button>
+    </div>
+</div>
