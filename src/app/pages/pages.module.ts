@@ -15,6 +15,7 @@ import { PagesComponent } from './pages.component';
 import { ProgressComponent } from '../components/progress/progress.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraphsComponent } from '../components/graphs/graphs.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { GraphsComponent } from '../components/graphs/graphs.component';
     ProgressPageComponent,
     Graphs1Component,
     ProgressComponent,
-    GraphsComponent
+    GraphsComponent,
+    AccountSettingsComponent
   ],
   exports: [
     PagesComponent,
