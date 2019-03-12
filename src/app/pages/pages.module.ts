@@ -16,6 +16,8 @@ import { ProgressComponent } from '../components/progress/progress.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraphsComponent } from '../components/graphs/graphs.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     Graphs1Component,
     ProgressComponent,
     GraphsComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   exports: [
     PagesComponent,
