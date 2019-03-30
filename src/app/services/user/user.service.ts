@@ -11,14 +11,25 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-
   user: User;
   token: string;
 
-  constructor(public http: HttpClient, private _router: Router) { }
+  constructor(public http: HttpClient, private _router: Router) {
+    this.loadStorage();
+  }
 
   isLogged(): boolean {
-    return (this.token && this.token.length > 1);
+    return this.token && this.token.length > 1;
+  }
+
+  loadStorage() {
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+      this.user = JSON.parse(localStorage.getItem('user'));
+    } else {
+      this.token = null;
+      this.user = null;
+    }
   }
 
   saveStorage(id: string, token: string, user: User) {
@@ -31,7 +42,6 @@ export class UserService {
   }
 
   login(user: User, remember: boolean = false) {
-
     if (remember) {
       localStorage.setItem('email', user.email);
     } else {
@@ -39,10 +49,12 @@ export class UserService {
     }
 
     let url = WEBAPI_URL + '/login';
-    return this.http.post(url, user).pipe(map((resp: any) => {
-      this.saveStorage(resp.id, resp.token, resp.user);
-      return true;
-    }));
+    return this.http.post(url, user).pipe(
+      map((resp: any) => {
+        this.saveStorage(resp.id, resp.token, resp.user);
+        return true;
+      })
+    );
   }
 
   logout() {
@@ -56,11 +68,13 @@ export class UserService {
 
   loginGoogle(token: string) {
     let url = WEBAPI_URL + '/login/google';
-    return this.http.post(url, { token: token }).pipe(map((resp: any) => {
-      this.saveStorage(resp.id, resp.token, resp.user);
-      console.log(resp.user);
-      return true;
-    }));
+    return this.http.post(url, { token: token }).pipe(
+      map((resp: any) => {
+        this.saveStorage(resp.id, resp.token, resp.user);
+        console.log(resp.user);
+        return true;
+      })
+    );
   }
 
   createUser(user: User) {

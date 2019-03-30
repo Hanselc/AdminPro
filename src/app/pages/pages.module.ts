@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 // Routes
 import { PAGES_ROUTES } from './pages.routes';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../pipes/pipes.module';
+import { ChartsModule } from 'ng2-charts';
 
+// Custom Components
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
 import { Graphs1Component } from './graphs1/graphs1.component';
 import { PagesComponent } from './pages.component';
 import { ProgressComponent } from '../components/progress/progress.component';
-import { ChartsModule } from 'ng2-charts';
 import { GraphsComponent } from '../components/graphs/graphs.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -25,6 +28,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     FormsModule,
     ChartsModule,
     CommonModule,
+    PipesModule,
     PAGES_ROUTES
   ],
   declarations: [
@@ -36,7 +40,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     GraphsComponent,
     AccountSettingsComponent,
     PromisesComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent
   ],
   exports: [
     PagesComponent,

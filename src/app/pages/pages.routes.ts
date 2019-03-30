@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from '../services/service.index';
 
@@ -19,6 +20,7 @@ const pagesRoutes: Routes = [
       { path: 'progress-page', component: ProgressPageComponent, data: { title: 'Progress' }  },
       { path: 'graphs1', component: Graphs1Component, data: { title: 'Graphs' }  },
       { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Themes' }  },
+      { path: 'profile', component: ProfileComponent, data: { title: 'Profile' }  },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' }  },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' }  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
