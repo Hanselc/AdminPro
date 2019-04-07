@@ -10,7 +10,7 @@ export class ImagePipe implements PipeTransform {
     let url = WEBAPI_URL + '/image';
 
     if (!image) {
-      return (url = '/users/noimage');
+      return (url += '/users/noimage');
     }
 
     if (image.indexOf('https') >= 0) {

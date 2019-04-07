@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { WEBAPI_URL } from 'src/app/config/config';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
+import { WEBAPI_URL } from 'src/app/config/config';
 import { User } from 'src/app/models/user.model';
-import { Router } from '@angular/router';
+import { UploadFileService } from './../upload-file/upload-file.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class UserService {
   user: User;
   token: string;
 
-  constructor(public http: HttpClient, private _router: Router) {
+  constructor(public http: HttpClient, private _router: Router, private _uploadFileService: UploadFileService) {
     this.loadStorage();
   }
 
@@ -71,7 +71,6 @@ export class UserService {
     return this.http.post(url, { token: token }).pipe(
       map((resp: any) => {
         this.saveStorage(resp.id, resp.token, resp.user);
-        console.log(resp.user);
         return true;
       })
     );
@@ -80,5 +79,27 @@ export class UserService {
   createUser(user: User) {
     let url = WEBAPI_URL + '/user';
     return this.http.post(url, user);
+  }
+
+  updateUser(user: User) {
+    let url = WEBAPI_URL + '/user/' + user._id + '?token=' + this.token;
+    return this.http.put(url, user).pipe(
+      map((resp: any) => {
+        this.saveStorage(resp.user._id, this.token, resp.user);
+        return true;
+      })
+    );
+  }
+
+  changeImage(file: File, userId: string) {
+    return this._uploadFileService.uploadFile(file, 'users', userId)
+    .then((resp: any) => {
+      console.log(resp);
+      this.user.image = resp.user.image;
+      this.saveStorage(userId, this.token, this.user);
+      return resp;
+    }).catch((resp) => {
+      console.log('error ' + resp);
+    });
   }
 }
