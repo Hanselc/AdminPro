@@ -1,0 +1,60 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Configurar Usuarios</h4>
+                <input type="text" class="form-control" placeholder="Buscar Usuarios">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn">
+    <div class="col-sm-12">
+        <div class="alert alert-primary text-center">
+            <strong>Cargando</strong>
+            <br/>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br/>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios registrados (<small>{{total}}</small>)</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Correo</th>
+                            <th>Nombre</th>
+                            <th>Role</th>
+                            <th>Auth</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td></td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.role}}</td>
+                            <td>
+                                <label *ngIf="user.google" class="label label-danger">Google</label>
+                                <label *ngIf="!user.google" class="label label-info">Normal</label>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-save"></i></button>&nbsp;
+                                <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="loadFrom(-5)" class="btn btn-light">Anteriores</button>
+                <button (click)="loadFrom(5)" class="btn btn-light">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

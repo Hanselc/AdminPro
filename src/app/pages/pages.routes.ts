@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from '../services/service.index';
 
 import { PagesComponent } from './pages.component';
+import { UsersComponent } from './users/users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Graphs1Component } from './graphs1/graphs1.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
@@ -23,6 +24,8 @@ const pagesRoutes: Routes = [
       { path: 'profile', component: ProfileComponent, data: { title: 'Profile' }  },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' }  },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' }  },
+
+      { path: 'users', component: UsersComponent, data: { title: 'User Configurations' }  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ]
   },

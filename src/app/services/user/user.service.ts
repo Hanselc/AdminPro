@@ -102,4 +102,9 @@ export class UserService {
       console.log('error ' + resp);
     });
   }
+
+  loadUsers(from: number = 0) {
+    let url = WEBAPI_URL + '/user?from=' + from;
+    return this.http.get(url);
+  }
 }
