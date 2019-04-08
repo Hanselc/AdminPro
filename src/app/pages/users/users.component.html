@@ -3,12 +3,12 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Configurar Usuarios</h4>
-                <input type="text" class="form-control" placeholder="Buscar Usuarios">
+                <input #input (keyup)="searchUser(input.value)" type="text" class="form-control" placeholder="Buscar Usuarios">
             </div>
         </div>
     </div>
 </div>
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="loading">
     <div class="col-sm-12">
         <div class="alert alert-primary text-center">
             <strong>Cargando</strong>
@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -37,17 +37,22 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of users">
-                            <td></td>
+                            <td class="w70"><img (click)="showModal(user._id)" [src]="user.image | image" class="w50 img-circle pointer"></td>
                             <td>{{user.email}}</td>
                             <td>{{user.name}}</td>
-                            <td>{{user.role}}</td>
+                            <td>
+                                <select [(ngModel)]="user.role" class="form-control-sm">
+                                <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                                <option value="USER_ROLE">USER_ROLE</option>
+                              </select>
+                            </td>
                             <td>
                                 <label *ngIf="user.google" class="label label-danger">Google</label>
                                 <label *ngIf="!user.google" class="label label-info">Normal</label>
                             </td>
                             <td>
-                                <button class="btn btn-primary"><i class="fa fa-save"></i></button>&nbsp;
-                                <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                <button class="btn btn-primary" (click)="saveUser(user)"><i class="fa fa-save"></i></button>&nbsp;
+                                <button class="btn btn-danger" (click)="deleteUser(user)"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>
                     </tbody>

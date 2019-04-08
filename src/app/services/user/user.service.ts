@@ -85,7 +85,9 @@ export class UserService {
     let url = WEBAPI_URL + '/user/' + user._id + '?token=' + this.token;
     return this.http.put(url, user).pipe(
       map((resp: any) => {
-        this.saveStorage(resp.user._id, this.token, resp.user);
+        if (user._id === this.user._id) {
+          this.saveStorage(resp.user._id, this.token, resp.user);
+        }
         return true;
       })
     );
@@ -94,7 +96,6 @@ export class UserService {
   changeImage(file: File, userId: string) {
     return this._uploadFileService.uploadFile(file, 'users', userId)
     .then((resp: any) => {
-      console.log(resp);
       this.user.image = resp.user.image;
       this.saveStorage(userId, this.token, this.user);
       return resp;
@@ -106,5 +107,15 @@ export class UserService {
   loadUsers(from: number = 0) {
     let url = WEBAPI_URL + '/user?from=' + from;
     return this.http.get(url);
+  }
+
+  searchUser(term: string) {
+    let url = WEBAPI_URL + '/search/collection/user/' + term;
+    return this.http.get(url).pipe(map((resp: any) => resp.user));
+  }
+
+  deleteUser(id: string) {
+    let url = WEBAPI_URL + '/user/' + id + '?token=' + this.token;
+    return this.http.delete(url);
   }
 }
