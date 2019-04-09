@@ -1,6 +1,7 @@
-import { ProfileComponent } from './profile/profile.component';
+
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from '../services/service.index';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 import { PagesComponent } from './pages.component';
 import { UsersComponent } from './users/users.component';
@@ -9,7 +10,8 @@ import { Graphs1Component } from './graphs1/graphs1.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
 
 const pagesRoutes: Routes = [
   {
@@ -26,6 +28,7 @@ const pagesRoutes: Routes = [
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' }  },
 
       { path: 'users', component: UsersComponent, data: { title: 'User Configurations' }  },
+      { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospital Configurations' }  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ]
   },

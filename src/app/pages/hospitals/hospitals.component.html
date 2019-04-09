@@ -1,0 +1,50 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Configurar Hospitales</h4>
+                <input #input (keyup)="searchHospital(input.value)" type="text" class="form-control" placeholder="Buscar Hospital">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="loading">
+    <div class="col-sm-12">
+        <div class="alert alert-primary text-center">
+            <strong>Cargando</strong>
+            <br/>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br/>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!loading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales registrados (<small>{{total}}</small>)</h4>
+                <button (click)="createHospital()" class="btn btn-primary btn-add-hospital"><i class="fa fa-plus"></i> Crear Hospital</button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Hospital</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitals">
+                            <td class="w70"><img (click)="showModal(hospital._id)" [src]="hospital.image | image:'hospital'" class="w50 img-circle pointer"></td>
+                            <td><input type="text" [(ngModel)]="hospital.name" class="form-control"></td>
+                            <td>
+                                <button class="btn btn-primary" (click)="saveHospital(hospital)"><i class="fa fa-save"></i></button>&nbsp;
+                                <button class="btn btn-danger" (click)="deleteHospital(hospital)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

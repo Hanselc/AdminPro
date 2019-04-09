@@ -4,4 +4,5 @@ export { SharedService } from './shared/shared.service';
 export { SidebarService } from './shared/sidebar.service';
 export { UploadFileService } from './upload-file/upload-file.service';
 export { UserService } from './user/user.service';
+export { HospitalService } from './hospital/hospital.service';
 export { LoginGuard } from './guards/login.guard';
