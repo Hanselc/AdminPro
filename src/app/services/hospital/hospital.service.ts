@@ -3,24 +3,17 @@ import { Injectable } from '@angular/core';
 import { WEBAPI_URL } from 'src/app/config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HospitalService {
-  token: string;
 
-  constructor(private http: HttpClient) {
-    this.loadStorage();
-  }
-
-  loadStorage() {
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
-    } else {
-      this.token = null;
-    }
-  }
+  constructor(
+    private http: HttpClient,
+    private _userService: UserService
+    ) {}
 
   loadHospitals() {
     let url = WEBAPI_URL + '/hospital';
@@ -33,12 +26,12 @@ export class HospitalService {
   }
 
   deleteHospital(id: string) {
-    let url = WEBAPI_URL + '/hospital/' + id + '?token=' + this.token;
+    let url = WEBAPI_URL + '/hospital/' + id + '?token=' + this._userService.token;
     return this.http.delete(url);
   }
 
   createHospital(name: string) {
-    let url = WEBAPI_URL + '/hospital?token=' + this.token;
+    let url = WEBAPI_URL + '/hospital?token=' + this._userService.token;
     let hospital = new Hospital(name);
     return this.http.post(url, hospital);
   }
@@ -49,7 +42,7 @@ export class HospitalService {
   }
 
   updateHospital(hospital: Hospital) {
-    let url = WEBAPI_URL + '/hospital/' + hospital._id + '?token=' + this.token;
+    let url = WEBAPI_URL + '/hospital/' + hospital._id + '?token=' + this._userService.token;
     return this.http.put(url, hospital);
   }
 }

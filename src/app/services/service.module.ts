@@ -7,6 +7,7 @@ import { SettingsService,
   SharedService,
   UserService,
   HospitalService,
+  DoctorService,
   UploadFileService,
   ModalUploadService } from './service.index';
 
@@ -22,6 +23,7 @@ import { SettingsService,
     SharedService,
     UserService,
     HospitalService,
+    DoctorService,
     UploadFileService,
     ModalUploadService
   ],

@@ -85,6 +85,9 @@ export class HospitalsComponent implements OnInit {
       content: { element: 'input' }
     })
     .then((value) => {
+      if (!value) {
+        return;
+      }
       this.loading = true;
       this._hospitalService.createHospital(value).subscribe(resp => {
         this.loading = false;

@@ -12,6 +12,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HospitalsComponent } from './hospitals/hospitals.component';
+import { DoctorComponent } from './doctors/doctor.component';
+import { DoctorsComponent } from './doctors/doctors.component';
 
 const pagesRoutes: Routes = [
   {
@@ -29,6 +31,8 @@ const pagesRoutes: Routes = [
 
       { path: 'users', component: UsersComponent, data: { title: 'User Configurations' }  },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospital Configurations' }  },
+      { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctor Configurations' }  },
+      { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Update Doctor' }  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ]
   },
