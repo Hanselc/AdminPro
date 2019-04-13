@@ -58,7 +58,9 @@ export class LoginComponent implements OnInit {
     }
 
     let user = new User(null, form.value.email, form.value.password);
-    this._userService.login(user, this.rememberMe).subscribe(() => this.router.navigate(['/dashboard']));
+    this._userService.login(user, this.rememberMe).subscribe(() => this.router.navigate(['/dashboard']), err => {
+      swal('Error', err.error.message, 'error');
+    });
   }
 
 }

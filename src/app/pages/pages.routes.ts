@@ -1,10 +1,12 @@
 
 import { RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from '../services/service.index';
 import { RxjsComponent } from './rxjs/rxjs.component';
+
+import { LoginGuard, AdminGuard } from '../services/service.index';
 
 import { PagesComponent } from './pages.component';
 import { UsersComponent } from './users/users.component';
+import { SearchComponent } from './search/search.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Graphs1Component } from './graphs1/graphs1.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
@@ -28,8 +30,14 @@ const pagesRoutes: Routes = [
       { path: 'profile', component: ProfileComponent, data: { title: 'Profile' }  },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' }  },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' }  },
+      { path: 'search/:term', component: SearchComponent, data: { title: 'Search' }  },
 
-      { path: 'users', component: UsersComponent, data: { title: 'User Configurations' }  },
+      {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [AdminGuard],
+        data: { title: 'User Configurations' }
+      },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospital Configurations' }  },
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctor Configurations' }  },
       { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Update Doctor' }  },

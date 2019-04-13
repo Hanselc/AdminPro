@@ -52,6 +52,8 @@ export class RegisterComponent implements OnInit {
     this._userService.createUser(user).subscribe(resp => {
       swal('User Created', user.email, 'success');
       this.router.navigate(['/login']);
+    }, err => {
+      swal(err.error.message, err.error.errors.message, 'error');
     });
   }
 

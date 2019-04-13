@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { SettingsService,
+import { AdminGuard,
+  LoginGuard,
+  SettingsService,
   SidebarService,
   SharedService,
   UserService,
@@ -18,6 +20,8 @@ import { SettingsService,
   ],
   declarations: [],
   providers: [
+    AdminGuard,
+    LoginGuard,
     SettingsService,
     SidebarService,
     SharedService,
@@ -25,7 +29,9 @@ import { SettingsService,
     HospitalService,
     DoctorService,
     UploadFileService,
-    ModalUploadService
+    ModalUploadService,
+
+
   ],
 })
 export class ServiceModule { }

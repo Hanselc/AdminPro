@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
+import { throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { WEBAPI_URL } from 'src/app/config/config';
 import { User } from 'src/app/models/user.model';
 import { UploadFileService } from './../upload-file/upload-file.service';
+
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +17,7 @@ import { UploadFileService } from './../upload-file/upload-file.service';
 export class UserService {
   user: User;
   token: string;
+  menu: any = [];
 
   constructor(public http: HttpClient, private _router: Router, private _uploadFileService: UploadFileService) {
     this.loadStorage();
@@ -26,19 +31,23 @@ export class UserService {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.user = JSON.parse(localStorage.getItem('user'));
+      this.menu = JSON.parse(localStorage.getItem('menu'));
     } else {
       this.token = null;
       this.user = null;
+      this.menu = [];
     }
   }
 
-  saveStorage(id: string, token: string, user: User) {
+  saveStorage(id: string, token: string, user: User, menu: any) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.user = user;
     this.token = token;
+    this.menu = menu;
   }
 
   login(user: User, remember: boolean = false) {
@@ -51,8 +60,11 @@ export class UserService {
     let url = WEBAPI_URL + '/login';
     return this.http.post(url, user).pipe(
       map((resp: any) => {
-        this.saveStorage(resp.id, resp.token, resp.user);
+        this.saveStorage(resp.id, resp.token, resp.user, resp.menu);
         return true;
+      }),
+      catchError((err) => {
+        return throwError(err);
       })
     );
   }
@@ -60,9 +72,11 @@ export class UserService {
   logout() {
     this.user = null;
     this.token = null;
+    this.menu = [];
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
     this._router.navigate(['/login']);
   }
 
@@ -70,7 +84,7 @@ export class UserService {
     let url = WEBAPI_URL + '/login/google';
     return this.http.post(url, { token: token }).pipe(
       map((resp: any) => {
-        this.saveStorage(resp.id, resp.token, resp.user);
+        this.saveStorage(resp.id, resp.token, resp.user, resp.menu);
         return true;
       })
     );
@@ -78,7 +92,11 @@ export class UserService {
 
   createUser(user: User) {
     let url = WEBAPI_URL + '/user';
-    return this.http.post(url, user);
+    return this.http.post(url, user).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
   }
 
   updateUser(user: User) {
@@ -86,7 +104,7 @@ export class UserService {
     return this.http.put(url, user).pipe(
       map((resp: any) => {
         if (user._id === this.user._id) {
-          this.saveStorage(resp.user._id, this.token, resp.user);
+          this.saveStorage(resp.user._id, this.token, resp.user, this.menu);
         }
         return true;
       })
@@ -97,7 +115,7 @@ export class UserService {
     return this._uploadFileService.uploadFile(file, 'users', userId)
     .then((resp: any) => {
       this.user.image = resp.user.image;
-      this.saveStorage(userId, this.token, this.user);
+      this.saveStorage(userId, this.token, this.user, this.menu);
       return resp;
     }).catch((resp) => {
       console.log('error ' + resp);
