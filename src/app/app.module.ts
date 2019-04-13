@@ -6,12 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APP_ROUTES } from './app.routes';
 
 // Modules
-import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
+import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { PagesComponent } from './pages/pages.component';
 import { RegisterComponent } from './login/register.component';
 
 // Services
@@ -20,14 +21,15 @@ import { RegisterComponent } from './login/register.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
-    PagesModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
+    SharedModule,
     APP_ROUTES
   ],
   providers: [

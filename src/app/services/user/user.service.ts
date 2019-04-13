@@ -23,6 +23,21 @@ export class UserService {
     this.loadStorage();
   }
 
+  renewToken() {
+    let url = WEBAPI_URL + '/login/renewtoken?token=' + this.token;
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        this.token = resp.token;
+        localStorage.setItem('token', this.token);
+        return true;
+      }),
+      catchError(err => {
+        this.logout();
+        return throwError(err);
+      })
+    );
+  }
+
   isLogged(): boolean {
     return this.token && this.token.length > 1;
   }

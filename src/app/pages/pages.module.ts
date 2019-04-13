@@ -15,14 +15,12 @@ import { ChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
 import { Graphs1Component } from './graphs1/graphs1.component';
-import { PagesComponent } from './pages.component';
 import { ProgressComponent } from '../components/progress/progress.component';
 import { GraphsComponent } from '../components/graphs/graphs.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorComponent } from './doctors/doctor.component';
@@ -38,7 +36,6 @@ import { SearchComponent } from './search/search.component';
     PAGES_ROUTES
   ],
   declarations: [
-    PagesComponent,
     DashboardComponent,
     ProgressPageComponent,
     Graphs1Component,
@@ -49,14 +46,12 @@ import { SearchComponent } from './search/search.component';
     RxjsComponent,
     ProfileComponent,
     UsersComponent,
-    ModalUploadComponent,
     HospitalsComponent,
     DoctorsComponent,
     DoctorComponent,
     SearchComponent
   ],
   exports: [
-    PagesComponent,
     DashboardComponent,
     ProgressPageComponent,
     Graphs1Component

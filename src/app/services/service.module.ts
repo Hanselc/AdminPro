@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdminGuard,
   LoginGuard,
+  TokenVerificatorGuard,
   SettingsService,
   SidebarService,
   SharedService,
@@ -22,6 +23,7 @@ import { AdminGuard,
   providers: [
     AdminGuard,
     LoginGuard,
+    TokenVerificatorGuard,
     SettingsService,
     SidebarService,
     SharedService,
@@ -30,8 +32,6 @@ import { AdminGuard,
     DoctorService,
     UploadFileService,
     ModalUploadService,
-
-
   ],
 })
 export class ServiceModule { }

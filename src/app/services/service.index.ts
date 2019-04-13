@@ -1,5 +1,6 @@
 export { LoginGuard } from './guards/login.guard';
 export { AdminGuard } from './guards/admin.guard';
+export { TokenVerificatorGuard} from './guards/token-verificator.guard';
 
 export { ModalUploadService } from './upload-file/modal-upload.service';
 export { SettingsService } from './settings/settings.service';
